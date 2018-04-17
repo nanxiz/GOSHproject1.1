@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const CONFIG = {
-  apiURL: 'https://goshugeducation.azurewebsites.net'
-  //apiURL: 'http://localhost:10255/'
+  apiURL: 'http://localhost:10255/'
 };
 
 
