@@ -1,0 +1,62 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title style='text-align:center'>module</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list  class="accordion-list">
+    <ion-list-header no-padding no-lines *ngFor="let product of products;let i = index">
+      <button ion-item no-line (click)="toggleSection(i)"
+              detail-none
+              [ngClass]="{'section-active':product.open, 'section':!product.open}">
+        <ion-icon item-right name="arrow-forward" *ngIf="!product.open"></ion-icon>
+        <ion-icon item-right name="arrow-down" *ngIf="product.open"></ion-icon>
+        {{product.name}}
+      </button>
+
+      <ion-list *ngIf="product.brief && product.open" no-lines detail-none text-wrap>
+        <ion-item>
+          <h4>INTRODUCTION:</h4>
+          <p text-lowercase>{{product.brief}}</p>
+        </ion-item>
+        <ion-item>
+          <button ion-button item-right color="pink" round (click)="gotoModuleDetail(product)">View Module</button>
+          <button ion-button item-left color="pink" round (click)="gotoQuiz(product.questions)">Take a quiz</button>
+        </ion-item>
+      </ion-list>
+
+
+
+    </ion-list-header>
+
+
+  </ion-list>
+
+
+
+  <!--
+  <ion-list>
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item class="item-button-right">
+        <button ion-button round color="aqua" clear item-end (click)="gotoModuleDetail(product)">View</button>
+
+        {{product.name}}
+      </ion-item>
+      <ion-item-options side="right">
+
+        <button ion-button color="pink" item-end (click)="gotoQuiz(product.questions)">Quiz</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  
+  -->
+
+
+
+
+</ion-content>
