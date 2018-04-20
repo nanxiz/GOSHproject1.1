@@ -1,0 +1,6 @@
+page-leaderboard {
+    .lbg{
+        background-color: map-get($map: $colors, $key: primary);
+        
+      }
+}

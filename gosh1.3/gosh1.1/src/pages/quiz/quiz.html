@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="white">
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-slides #slides>
+
+    <ion-slide class="start-end-slide">
+      <button ion-button round large color="primary" (click)="nextSlide()">
+        Start!
+      </button>
+
+    </ion-slide>
+    <ion-slide *ngFor="let question of questions;let i = index;">
+      <h4 class="qheader">Question {{i+1}}:</h4>
+      <h4>{{question.question}}</h4>
+      <ion-list no-lines radio-group>
+        <ion-item *ngFor="let option of question.options;let i = index;">
+          <ion-label>{{i+1}}.{{option.option}}</ion-label>
+          <ion-radio (click)="selectAnswers(option,question,i)" [checked]="option.selected" [disabled]="answered"></ion-radio>
+
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide class="finalslide">
+      <ion-card class="card" >
+  
+      <ion-card-header style="text-align: center;" class="cheader">Correctness: {{score}} out of {{count}}</ion-card-header>
+      <p class="points">+Point{{pointToAdd}}!</p>
+      <ion-row class="row">
+        <ion-col width-50 style="text-align:center">
+
+          <button icon-only (click)="gotoModulePage()"  large ion-button round color="primary">
+            <ion-icon item-right name="arrow-round-back"></ion-icon>
+          </button>
+        </ion-col>
+
+        <ion-col width-50 style="text-align:center">
+
+          <button icon-only (click)="restartquiz()"  large  ion-button round color="primary">
+            <ion-icon item-right name="refresh"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col width-50 style="text-align:center">
+
+          <button icon-only (click)="gotoLeaderboard()"  large  ion-button round color="primary">
+            <ion-icon item-right name="medal"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="white">
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding id="register">
+  <ion-list >
+    <ion-item>
+      <ion-label stacked>Username</ion-label>
+      <ion-input [(ngModel)]="name" type="text" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input type="password" value="" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="email" value="" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked >Department</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="department"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked >University</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="university"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full round class="tMargin" (click)="register()">Register</button>
+  <!--<a href="#" (click)="login()">Back to Login Page</a>-->
+  <button ion-button full clear small class="bMargin" (click)="login()">Go Back to Login</button>
+
+
+</ion-content>
