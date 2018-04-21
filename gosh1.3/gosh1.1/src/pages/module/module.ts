@@ -14,11 +14,16 @@ import { UserserviceProvider } from '../../providers/userservice/userservice';
   templateUrl: 'module.html',
 })
 export class ModulePage {
-  apiURL = this.appsetting.getApiURL() + 'products/';
+  //apiURL = this.appsetting.getApiURL() + 'products/';
   modules: any;
+  departmentModule:any;
   products: any;
   name:any;
   level:any;
+  department='';
+  dptModuleProduct:any;
+  moduleType:"myModule";
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -38,6 +43,7 @@ export class ModulePage {
     this.moduleservise.loadmodules().then((result) => {
       this.modules = result;
       localStorage.setItem('modules', JSON.stringify(this.modules));
+      console.log(this.modules);
     }, (err) => {     
     });
     //for unknown reason modules' value couldn't be passed so code below is given.
@@ -46,12 +52,27 @@ export class ModulePage {
     
    // this.userInfo = JSON.parse(localStorage.getItem('profile'));
     this.getUserInfo();
-   
+    this.getUserDepartmentModule();
+    
 
     console.log(this.modules);
    // console.log(this.userInfo);
   }
 
+  getUserDepartmentModule(){
+    this.moduleservise.postToGetPersonalizedModule(this.department).then((result) => {
+      this.departmentModule = result;
+      localStorage.setItem('departmentModules', JSON.stringify(this.departmentModule));
+      console.log(result);
+    }, (err) => {     
+      //TOGGLE THINGI HERE
+
+    });
+    this.departmentModule = JSON.parse(localStorage.getItem('departmentModules'));
+    this.dptModuleProduct=this.departmentModule.product;
+    console.log('all',this.dptModuleProduct);
+    console.log('all',this.departmentModule);
+  }
   getUserInfo() {
     this.userservice.getUserdetail().then((result) => {
       let profile = result;
@@ -63,10 +84,18 @@ export class ModulePage {
     }, (err) => {
       
       });
-      let userInfo = JSON.parse(localStorage.getItem('profile'));
+    let userInfo = JSON.parse(localStorage.getItem('profile'));
 
     this.name = userInfo.user.name;
-this.level=userInfo.user.level;
+    this.department=userInfo.user.department;
+
+
+
+    this.department = 'haise';
+//////////////////////
+    //delete later;
+    //console.log({jijiji:this.department});
+    this.level=userInfo.user.level;
   }
 
   gotoModuleDetail(product) {

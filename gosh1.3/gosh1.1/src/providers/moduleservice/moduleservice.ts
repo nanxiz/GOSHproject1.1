@@ -12,6 +12,21 @@ export class ModuleserviceProvider {
   constructor(public http: HttpClient, public appsetting: AppsettingProvider) {
     
   }
+
+  public postToGetPersonalizedModule(department:any){
+    let departmentData={
+      'department':''+department
+    };
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.post(this.apiURL + 'department', departmentData)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+   }
   public loadmodules() {
     return new Promise((resolve, reject) => {
       this.http.get(this.apiURL)

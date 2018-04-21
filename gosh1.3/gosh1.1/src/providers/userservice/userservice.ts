@@ -65,18 +65,26 @@ export class UserserviceProvider {
 
   }
 
-  public postToLogin(username, password) { //change
+  public postToLogin(userData) { //change
 
-    return this.http.post(this.apiURL + 'login', { 'name': username, 'password': password })
-      .subscribe(response => console.log(response));
+     return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.post(this.apiURL + 'login', userData,{
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
-
 
 
   
   public postToRegister(userData) {
     return new Promise((resolve, reject) => {
-      //let hheaders = new Headers();
+
       this.http.post(this.apiURL + 'signup', userData)
         .subscribe(res => {
           resolve(res);
@@ -85,11 +93,27 @@ export class UserserviceProvider {
         });
     });
   }
-  
+
 
   public getUserModules() {
-    return this.http.get(this.apiURL + 'signup', {})
+    return this.http.get(this.apiURL + 'signup')
       .subscribe(response => console.log(response));
   }
+
+  public getDepartments(){
+
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.apiURL + 'all/departments')
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  
+
 
 }

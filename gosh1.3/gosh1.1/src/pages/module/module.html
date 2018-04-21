@@ -1,27 +1,43 @@
 
-<ion-header>
+<ion-header no-shadow>
 
   <ion-navbar color="white">
     <ion-title style='text-align:center'>module</ion-title>
   </ion-navbar>
+  <ion-toolbar color="white" no-border-top>
+      <ion-item> 
+          <ion-avatar  item-start>
+            <img src="assets/imgs/userinit.jpg">
+          </ion-avatar>
+          Hello {{name}}
+          <p>your level:{{level}}</p>
+          
+        </ion-item>
+      </ion-toolbar>
+
+      <ion-toolbar color="white" no-border-top>
+
+      <ion-segment [(ngModel)]="moduleType">
+          <ion-segment-button value="myModule">
+              My Modules
+          </ion-segment-button>
+          <ion-segment-button value="allModule">
+             All Modules
+          </ion-segment-button>
+         
+        </ion-segment>
+      </ion-toolbar>
+
+
 
 </ion-header>
 
 
 <ion-content padding class="mbg">
-<ion-item> 
-  <ion-avatar  item-start>
-    <img src="assets/imgs/userinit.jpg">
-  </ion-avatar>
-  Hello {{name}}
-  <p>your level:{{level}}</p>
   
-</ion-item>
-
-  <ion-list  class="accordion-list">
-    <ion-list-header>
-      <h4 class="header">My Modules</h4>
-    </ion-list-header>
+<div [ngSwitch]="moduleType">
+  <ion-list *ngSwitchCase="'allModule'"  class="accordion-list">
+  
     <ion-list-header no-padding no-lines *ngFor="let product of products;let i = index">
       <button ion-item no-line (click)="toggleSection(i)"
               detail-none
@@ -31,16 +47,20 @@
         {{product.name}}
       </button>
 
-      <ion-list *ngIf="product.brief && product.open" no-lines detail-none text-wrap>
+      <ion-list *ngIf="product.open" no-lines detail-none text-wrap>
         <ion-item>
-          <h4>INTRODUCTION:</h4>
-          <p text-lowercase>{{product.brief}}</p>
+          <h4 *ngIf="product.brief">INTRODUCTION:</h4>
+          <p text-lowercase *ngIf="product.brief">{{product.brief}}</p>
         </ion-item>
         <ion-item>
           <button ion-button item-right color="primary" round (click)="gotoModuleDetail(product)">View Module</button>
           <button ion-button item-left color="primary" round (click)="gotoQuiz(product.name,product.questions)">Take a quiz</button>
         </ion-item>
       </ion-list>
+  
+      
+
+
 
 
 
@@ -49,7 +69,31 @@
 
   </ion-list>
 
+<ion-list *ngSwitchCase="'myModule'" class="accordion-list">
+    <ion-list-header no-padding no-lines *ngFor="let product of dptModuleProduct;let i = index">
+        <button ion-item no-line (click)="toggleSection(i)"
+                detail-none
+                [ngClass]="{'section-active':product.open, 'section':!product.open}">
+          <ion-icon item-right name="arrow-forward" *ngIf="!product.open"></ion-icon>
+          <ion-icon item-right color="primary" name="arrow-down" *ngIf="product.open"></ion-icon>
+          {{product.name}}
+        </button>
+        <ion-list *ngIf="product.open" no-lines detail-none text-wrap>
+            <ion-item>
+              <h4 *ngIf="product.brief">INTRODUCTION:</h4>
+              <p text-lowercase *ngIf="product.brief">{{product.brief}}</p>
+            </ion-item>
+            <ion-item>
+              <button ion-button item-right color="primary" round (click)="gotoModuleDetail(product)">View Module</button>
+              <button ion-button item-left color="primary" round (click)="gotoQuiz(product.name,product.questions)">Take a quiz</button>
+            </ion-item>
+          </ion-list>
 
+      </ion-list-header>
+
+</ion-list>
+      
+      </div>
 
   <!--
   <ion-list>

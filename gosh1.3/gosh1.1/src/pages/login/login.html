@@ -6,14 +6,14 @@
     
       <ion-item>
         <ion-label stacked>Username</ion-label>
-        <ion-input type="text" value></ion-input>
+        <ion-input [(ngModel)]="name"  type="text" value></ion-input>
       </ion-item>
     
     <ion-item>
       <ion-label stacked>Password</ion-label>
-      <ion-input type="text" value></ion-input>
+      <ion-input [(ngModel)]="password" type="text" value></ion-input>
     </ion-item>
   </ion-list>
-  <button ion-button round full class="tMargin" (click)="login()">Log in</button>
+  <button ion-button round block outline class="tMargin" (click)="login()">Log in</button>
   <button ion-button full clear class="bMargin" small (click)="registerPage()">Not registered yet? Register here</button>
 </ion-content>

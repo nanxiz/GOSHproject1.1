@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserserviceProvider } from '../../providers/userservice/userservice'
+import { WheelSelector } from '@ionic-native/wheel-selector';
 
 
 @IonicPage()
@@ -13,6 +14,7 @@ import { UserserviceProvider } from '../../providers/userservice/userservice'
 
 export class RegisterPage {
   responseData: any;
+  departments:any;
     name='';
   //email: any;
   department='';
@@ -32,13 +34,49 @@ export class RegisterPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public registerService: UserserviceProvider,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private select: WheelSelector
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
+    this.getDptOption();
+ 
   }
+
+  getDptOption(){
+    this.registerService.getDepartments().then((result) => {
+      this.departments = result;
+      //let toast = this.toastCtrl.create(this.responseData);
+      //toast.present();
+      console.log(this.departments);
+      localStorage.setItem('departments', JSON.stringify(this.departments));
+
+    }, (err) => {
+      this.showToast('you are unable to register now.No connect to the server');
+    });
+
+    this.departments= JSON.parse(localStorage.getItem('departments'));
+    console.log('qunimaded!',this.department);
+  }
+  OpenDepartmentPicker(){
+      this.select.show({
+        title:'Select your department',
+        positiveButtonText:'Choose',
+        negativeButtonText:'Quit',
+        items:[
+          this.departments
+        ],
+        defaultItems:[
+          {index:0,value:this.departments[1]}
+        ]
+      }).then(res=>{
+        //let message = 'Selected' $res;
+      })
+  }
+
+
   register() {
     let userData = {
       'name': this.name,

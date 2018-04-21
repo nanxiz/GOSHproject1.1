@@ -11,12 +11,36 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item (click)="openBrowser(gosh)"> 
       <ion-avatar item-start>
           <img src="assets/imgs/gosh.png">
 
       </ion-avatar>
       GOSH Website
     </ion-item>
+
+    <ion-item (click)="openBrowser(goshGold)"> 
+        <ion-avatar item-start>
+            <img src="assets/imgs/gosh.png">
+  
+        </ion-avatar>
+        GOSH GOLD LMS
+      </ion-item>
+
+      <ion-item (click)="openBrowser(lsp)"> 
+          <ion-avatar item-start>
+              <img src="assets/imgs/gosh.png">
+    
+          </ion-avatar>
+          London School Of Paediatrics
+        </ion-item>
+
+        <ion-item (click)="openBrowser(rpcch)"> 
+            <ion-avatar item-start>
+                <img src="assets/imgs/gosh.png">
+      
+            </ion-avatar>
+            RCPCH
+          </ion-item>
   </ion-list>
 </ion-content>

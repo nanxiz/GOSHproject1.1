@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header #head>
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -7,9 +7,9 @@
   </ion-navbar>
 </ion-header>
 
- <ion-content padding>
+ <ion-content padding hideheader [header]="head">
   
-   <ion-card style="width:100%" *ngFor="let person of people">
+   <ion-card  *ngFor="let person of people">
 
      <ion-card-header><h1>{{person.name}}</h1></ion-card-header>
      <ion-card-content>
@@ -20,7 +20,7 @@
          <h4> {{person.role}}</h4>
 
        </ion-item>
-
+  
 
 
        <ion-item text-wrap>
@@ -50,7 +50,7 @@
 
 
 
-       <p>
+       <p *ngIf="person.description">
        Description: {{person.description}}</p>
 
      </ion-card-content>
