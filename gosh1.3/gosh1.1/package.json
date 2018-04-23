@@ -42,7 +42,10 @@
     "cordova-plugin-themeablebrowser": "^0.2.17",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-wheel-selector-plugin": "^1.1.0",
+<<<<<<< HEAD
+=======
     "email": "^0.2.6",
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     "intl": "^1.2.5",
     "ionic": "3.20.0",
     "ionic-angular": "3.9.2",
