@@ -22,7 +22,11 @@ export class ModulePage {
   level:any;
   department='';
   dptModuleProduct:any;
+<<<<<<< HEAD
   moduleType;
+=======
+  moduleType:"myModule";
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
   constructor(
     public navCtrl: NavController,
@@ -62,17 +66,26 @@ export class ModulePage {
   }
 
   getUserDepartmentModule(){
+<<<<<<< HEAD
     let departmentData:any;
     departmentData={
       "department":this.department
       
     };
     this.moduleservise.postToGetPersonalizedModule(departmentData).then((result) => {
+=======
+    this.moduleservise.postToGetPersonalizedModule(this.department).then((result) => {
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
       this.departmentModule = result;
       localStorage.setItem('departmentModules', JSON.stringify(this.departmentModule));
       console.log(result);
     }, (err) => {     
+<<<<<<< HEAD
     
+=======
+      //TOGGLE THINGI HERE
+
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     });
     this.departmentModule = JSON.parse(localStorage.getItem('departmentModules'));
     this.dptModuleProduct=this.departmentModule.product;
@@ -93,7 +106,18 @@ export class ModulePage {
     let userInfo = JSON.parse(localStorage.getItem('profile'));
 
     this.name = userInfo.user.name;
+<<<<<<< HEAD
     this.department=''+(userInfo.user.department);
+=======
+    this.department=userInfo.user.department;
+
+
+
+    this.department = 'haise';
+//////////////////////
+    //delete later;
+    //console.log({jijiji:this.department});
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     this.level=userInfo.user.level;
   }
 

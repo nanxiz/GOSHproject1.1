@@ -13,6 +13,7 @@ export class ModuleserviceProvider {
     
   }
 
+<<<<<<< HEAD
   public postToGetPersonalizedModule(departmentData){
    
     console.log("department",departmentData);
@@ -21,6 +22,15 @@ export class ModuleserviceProvider {
       this.http.post(this.apiURL + 'department', departmentData,{
         headers: { 'Content-Type': 'application/json' }
       })
+=======
+  public postToGetPersonalizedModule(department:any){
+    let departmentData={
+      'department':''+department
+    };
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.post(this.apiURL + 'department', departmentData)
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
         .subscribe(res => {
           resolve(res);
         }, (err) => {

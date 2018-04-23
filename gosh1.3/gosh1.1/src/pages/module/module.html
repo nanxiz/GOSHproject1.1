@@ -5,6 +5,7 @@
 
     <ion-title style='text-align:center'>module</ion-title>
   </ion-navbar>
+<<<<<<< HEAD
   <ion-toolbar color="white" no-border-top no-border-bottom>
       <ion-item color="primary"> 
           <ion-avatar  item-start>
@@ -12,6 +13,15 @@
           </ion-avatar>
          <h1> Hello {{name}}</h1>
           <p style="color:black" class="level">your level:{{level}}</p>
+=======
+  <ion-toolbar color="white" no-border-top>
+      <ion-item> 
+          <ion-avatar  item-start>
+            <img src="assets/imgs/userinit.jpg">
+          </ion-avatar>
+          Hello {{name}}
+          <p>your level:{{level}}</p>
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
           
         </ion-item>
       </ion-toolbar>
@@ -26,7 +36,11 @@
              All Modules
           </ion-segment-button>
          
+<<<<<<< HEAD
         </ion-segment> 
+=======
+        </ion-segment>
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
       </ion-toolbar>
 
 
@@ -48,12 +62,19 @@
         {{product.name}}
       </button>
 
+<<<<<<< HEAD
       <ion-list *ngIf="product.open"  detail-none text-wrap>
         <ion-item>
           <h4 *ngIf="product.brief">INTRODUCTION:</h4>
           <p 
           text-lowercase
           *ngIf="product.brief">{{product.brief}}</p>
+=======
+      <ion-list *ngIf="product.open" no-lines detail-none text-wrap>
+        <ion-item>
+          <h4 *ngIf="product.brief">INTRODUCTION:</h4>
+          <p text-lowercase *ngIf="product.brief">{{product.brief}}</p>
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
         </ion-item>
         <ion-item>
           <button ion-button item-right color="primary" round (click)="gotoModuleDetail(product)">View Module</button>
@@ -62,13 +83,46 @@
       </ion-list>
   
       
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
 
 
 
 
+<<<<<<< HEAD
     </ion-list-header>
 
+=======
+<ion-list *ngSwitchCase="'myModule'" class="accordion-list">
+    <ion-list-header no-padding no-lines *ngFor="let product of dptModuleProduct;let i = index">
+        <button ion-item no-line (click)="toggleSection(i)"
+                detail-none
+                [ngClass]="{'section-active':product.open, 'section':!product.open}">
+          <ion-icon item-right name="arrow-forward" *ngIf="!product.open"></ion-icon>
+          <ion-icon item-right color="primary" name="arrow-down" *ngIf="product.open"></ion-icon>
+          {{product.name}}
+        </button>
+        <ion-list *ngIf="product.open" no-lines detail-none text-wrap>
+            <ion-item>
+              <h4 *ngIf="product.brief">INTRODUCTION:</h4>
+              <p text-lowercase *ngIf="product.brief">{{product.brief}}</p>
+            </ion-item>
+            <ion-item>
+              <button ion-button item-right color="primary" round (click)="gotoModuleDetail(product)">View Module</button>
+              <button ion-button item-left color="primary" round (click)="gotoQuiz(product.name,product.questions)">Take a quiz</button>
+            </ion-item>
+          </ion-list>
+
+      </ion-list-header>
+
+</ion-list>
+      
+      </div>
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
   </ion-list>
 

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <ion-header>
   <ion-navbar color="white">
+=======
+<ion-header #head>
+  <ion-navbar color="primary">
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,7 +12,11 @@
   </ion-navbar>
 </ion-header>
 
+<<<<<<< HEAD
  <ion-content padding class="c">
+=======
+ <ion-content padding hideheader [header]="head">
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   
    <ion-card  *ngFor="let person of people">
 

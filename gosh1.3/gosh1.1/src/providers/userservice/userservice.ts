@@ -138,6 +138,7 @@ export class UserserviceProvider {
     });
   }
 
+<<<<<<< HEAD
   public showToast(message: string) {
     let toast = this.toastCtrl.create({
       message: message,
@@ -145,6 +146,8 @@ export class UserserviceProvider {
     });
     toast.present();
   }
+=======
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   
 
 

@@ -4,7 +4,10 @@ import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
    
+<<<<<<< HEAD
 
+=======
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
 
 @IonicPage()
@@ -35,16 +38,44 @@ export class LoginPage {
 
 
   login() {
+<<<<<<< HEAD
     let userLogin = {
+=======
+    let userData = {
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
       "name": this.name,
       
       "password": this.password
     };
 
+<<<<<<< HEAD
     console.log(userLogin);
     
     this.loginService.postToLogin(userLogin).then((result) => {
       console.log(result);
+=======
+    console.log(userData);
+    
+    this.loginService.postToLogin(userData).then((result) => {
+      console.log(result);
+      let responseData:any;
+      responseData = result;
+      //let toast = this.toastCtrl.create(this.responseData);
+      //toast.present();
+      console.log(responseData);
+      this.showToast(responseData.message);
+      localStorage.setItem('userID', JSON.stringify(responseData));
+      //this.navCtrl.push(LoginPage);
+
+    }, (err) => {
+      this.showToast('email is invalid or has been registered before');
+    });
+    
+    this.userID = JSON.parse(localStorage.getItem('userID'));
+    console.log(this.userID);
+    this.userID = this.userID.id;
+    this.loginService.changeUserID(this.userID);
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
       let responseData:any;
       responseData = result;
@@ -91,7 +122,13 @@ export class LoginPage {
     
     }
   }
-
+  private showToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration:3200
+    });
+    toast.present();
+  }
 
 
 }
