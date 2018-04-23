@@ -1,1 +1,0 @@
-# GOSHproject1.1

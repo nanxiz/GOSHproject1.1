@@ -21,25 +21,25 @@ export class MyApp {
 
   rootPage: any = WelcomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{icon:string, color:string,title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Introduction', component: HomePage },
-      { title: 'Modules,Profile,Leaderboard', component: LearntabsPage },
-      { title: 'My Calender', component: CalenderPage },
-      { title: 'Useful Websites', component: UsefullinkPage },
+      { icon:"paper",color:'spring',title: 'Introduction', component: HomePage },
+      { icon:'filing',color:'secondary',title: 'Modules,Profile,Leaderboard', component: LearntabsPage },
+      //{ icon:'calendar',color:'danger',title: 'My Calender', component: CalenderPage },
+      { icon:'globe',color:'aqua',title: 'Useful Websites', component: UsefullinkPage },
 
-      { title: 'Key Contacts', component: ContactPage },
+      { icon:'contacts',color:'light',title: 'Key Contacts', component: ContactPage },
       //Maps
       //Forum
       //Websites
-      { title: 'Settings', component: SettingsPage },
+      { icon:'cog',color:'grey',title: 'Settings', component: SettingsPage },
      
-
+  
 
     ];
 

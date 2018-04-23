@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import {ToastController} from 'ionic-angular';
 
   
 import { Injectable } from '@angular/core';
@@ -15,18 +16,42 @@ export class UserserviceProvider {
   apiURL = this.appsetting.getApiURL() + 'users/';
 
 
-  userID = "5ace23ceb45c575b89f167c8"; 
+  userID = "5adbaef05a9468354e986a66"; 
 
 
 
-  constructor(public http: HttpClient, public appsetting: AppsettingProvider) {
+  constructor(
+    public http: HttpClient, 
+    public appsetting: AppsettingProvider,
+    private toastCtrl: ToastController,
+  ) {
     
   }
-
+  public loadevents(){  
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.appsetting.getApiURL() + 'events/')
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public changeUserID(newid: string) {
     this.userID = newid;
   }
-
+  public loadleaders(quizname){
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.apiURL + 'leaders/'+quizname)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public getAllUserDetail() {
     return new Promise((resolve, reject) => {
       //let hheaders = new Headers();
@@ -113,6 +138,16 @@ export class UserserviceProvider {
     });
   }
 
+<<<<<<< HEAD
+  public showToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 900
+    });
+    toast.present();
+  }
+=======
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   
 
 

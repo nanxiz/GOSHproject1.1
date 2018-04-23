@@ -6,7 +6,7 @@ import { AppsettingProvider } from '../../providers/appsetting/appsetting';
 import { ModuledetailPage } from '../moduledetail/moduledetail';
 import { QuizPage } from '../quiz/quiz';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
-
+//text-lowercase
 
 @IonicPage()
 @Component({
@@ -22,7 +22,11 @@ export class ModulePage {
   level:any;
   department='';
   dptModuleProduct:any;
+<<<<<<< HEAD
+  moduleType;
+=======
   moduleType:"myModule";
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
   constructor(
     public navCtrl: NavController,
@@ -33,24 +37,26 @@ export class ModulePage {
     public userservice: UserserviceProvider
   ) {
    
-
+    this.moduleType="myModule";
   }
 
   ionViewDidLoad() {
+    
+
     console.log('ionViewDidLoad ModulePage');
 
-    //put this shit in provider
     this.moduleservise.loadmodules().then((result) => {
       this.modules = result;
       localStorage.setItem('modules', JSON.stringify(this.modules));
       console.log(this.modules);
     }, (err) => {     
+      this.userservice.showToast('Unable to update modules. No connect to the server');
     });
-    //for unknown reason modules' value couldn't be passed so code below is given.
+
+
     this.modules = JSON.parse(localStorage.getItem('modules'));
     this.products = this.modules.products;
     
-   // this.userInfo = JSON.parse(localStorage.getItem('profile'));
     this.getUserInfo();
     this.getUserDepartmentModule();
     
@@ -60,13 +66,26 @@ export class ModulePage {
   }
 
   getUserDepartmentModule(){
+<<<<<<< HEAD
+    let departmentData:any;
+    departmentData={
+      "department":this.department
+      
+    };
+    this.moduleservise.postToGetPersonalizedModule(departmentData).then((result) => {
+=======
     this.moduleservise.postToGetPersonalizedModule(this.department).then((result) => {
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
       this.departmentModule = result;
       localStorage.setItem('departmentModules', JSON.stringify(this.departmentModule));
       console.log(result);
     }, (err) => {     
+<<<<<<< HEAD
+    
+=======
       //TOGGLE THINGI HERE
 
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     });
     this.departmentModule = JSON.parse(localStorage.getItem('departmentModules'));
     this.dptModuleProduct=this.departmentModule.product;
@@ -87,6 +106,9 @@ export class ModulePage {
     let userInfo = JSON.parse(localStorage.getItem('profile'));
 
     this.name = userInfo.user.name;
+<<<<<<< HEAD
+    this.department=''+(userInfo.user.department);
+=======
     this.department=userInfo.user.department;
 
 
@@ -95,6 +117,7 @@ export class ModulePage {
 //////////////////////
     //delete later;
     //console.log({jijiji:this.department});
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
     this.level=userInfo.user.level;
   }
 
@@ -104,23 +127,21 @@ export class ModulePage {
     });
   }
 
-  gotoQuiz(name,questions) {
+  gotoQuiz(name,questions,serial) {
     this.navCtrl.push(QuizPage, {
       moduleName:name,
-      questions: questions
+      questions: questions,
+      moduleSerial:serial
     })
   }
 
-
-  toggleSection(i) {
+  toggleModuleDetail(i) {
     this.products[i].open = !this.products[i].open;
   }
 
- // toggleItem(i, j) {
-   // this.products[i].children[j].open = !this.products[i].children[j].open;
-
-//  }
+  toggleModuleDetailD(i){
+    this.dptModuleProduct[i].open=!this.dptModuleProduct[i].open;
+  }
 
 }
-//*ngFor="let module of modules.products"
-//<ion-card-content>{{module.products.name}}</ion-card-content>
+

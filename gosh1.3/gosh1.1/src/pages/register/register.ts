@@ -60,6 +60,11 @@ export class RegisterPage {
     this.departments= JSON.parse(localStorage.getItem('departments'));
     console.log('qunimaded!',this.department);
   }
+<<<<<<< HEAD
+
+  /*
+=======
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   OpenDepartmentPicker(){
       this.select.show({
         title:'Select your department',
@@ -76,7 +81,11 @@ export class RegisterPage {
       })
   }
 
+<<<<<<< HEAD
+*/
+=======
 
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   register() {
     let userData = {
       'name': this.name,

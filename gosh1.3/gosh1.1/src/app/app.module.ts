@@ -28,7 +28,10 @@ import{WheelSelector} from '@ionic-native/wheel-selector';
 //import { Calendar } from '@ionic-native/Calendar';
 import {EmailComposer}from'@ionic-native/email-composer';
 import {ThemeableBrowser} from '@ionic-native/themeable-browser';
+<<<<<<< HEAD
+=======
 import {HideheaderDirective} from '../directives/hideheader/hideheader';
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
 @NgModule({
   declarations: [
@@ -38,8 +41,8 @@ import {HideheaderDirective} from '../directives/hideheader/hideheader';
     ContactPage,
     ModuleleaderPage,
     LearntabsPage,
-    UsefullinkPage,
-    
+    UsefullinkPage,  
+      
     SettingsPage,
     LoginPage,
     RegisterPage,

@@ -13,9 +13,20 @@
 
 
 <ion-content class="pbg" padding>
+<<<<<<< HEAD
+<div>
+      <img class="profile-image" [src]="imageUrl" style="width : 100% ; height : 70%" ng-click="changeImg()" >
+      <ion-item class="foo01">
+          <ion-avatar>
+            <img class="foo02" [src]="imageUrl">
+          </ion-avatar>
+        </ion-item>
+    </div>      <!--
+=======
 
       <img class="profile-image" [src]="imageUrl" style="width : 100% ; height : 70%" ng-click="changeImg()" >
 <!--
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
   <div>      <img class="profile-imageS" [src]="imageUrl" style="width : 100% ; height : 70%" ng-click="changeImg()" >
   </div>
 -->
@@ -32,15 +43,16 @@
 
 
     <ion-item  class="headers">
-      <p class="level" style="text-align: center;" id="profile-level">Your current Level</p>
+      <div item-left class="col">
+      <p  class="level" style="text-align: center;" id="profile-level">Your current Level</p>
       <p class="leveldetail" style="text-align: center;" id="profile-level">{{level}} </p>
-    </ion-item>
-
-  
-    <ion-item class="headers">
-
+    </div>
+    
+    <div item-right class="col col-50">
       <p class="points" style="text-align: center;" id="profile-points">Total Points </p>
       <p class="pointsdetail" style="text-align: center;" id="profile-points">{{points}} </p>
+    </div>
+   
     </ion-item>
   </ion-list>
 

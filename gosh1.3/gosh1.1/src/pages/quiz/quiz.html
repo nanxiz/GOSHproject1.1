@@ -17,34 +17,41 @@
       <h4>{{question.question}}</h4>
       <ion-list no-lines radio-group>
         <ion-item *ngFor="let option of question.options;let i = index;">
-          <ion-label>{{i+1}}.{{option.option}}</ion-label>
-          <ion-radio (click)="selectAnswers(option,question,i)" [checked]="option.selected" [disabled]="answered"></ion-radio>
+          <ion-label text-wrap>{{i+1}}. {{option.option}}</ion-label>
+          
+          <ion-radio (click)="selectAnswers(option,question)" [checked]="option.selected" [disabled]="answered"></ion-radio>
 
         </ion-item>
       </ion-list>
     </ion-slide>
+
+
     <ion-slide class="finalslide">
       <ion-card class="card" >
   
       <ion-card-header style="text-align: center;" class="cheader">Correctness: {{score}} out of {{count}}</ion-card-header>
+      <br>
       <p class="points">+Point{{pointToAdd}}!</p>
+      <br>
+      <p class="score">Your Score:</p>
+        <p class="scorevalue">{{newValue}}</p>
       <ion-row class="row">
         <ion-col width-50 style="text-align:center">
 
-          <button icon-only (click)="gotoModulePage()"  large ion-button round color="primary">
+          <button icon-only (click)="gotoModulePage()"  large ion-button round >
             <ion-icon item-right name="arrow-round-back"></ion-icon>
           </button>
         </ion-col>
 
         <ion-col width-50 style="text-align:center">
 
-          <button icon-only (click)="restartquiz()"  large  ion-button round color="primary">
+          <button icon-only (click)="restartquiz()"  large  ion-button round >
             <ion-icon item-right name="refresh"></ion-icon>
           </button>
         </ion-col>
         <ion-col width-50 style="text-align:center">
 
-          <button icon-only (click)="gotoLeaderboard()"  large  ion-button round color="primary">
+          <button icon-only (click)="gotoLeaderboard()"  large  ion-button round >
             <ion-icon item-right name="medal"></ion-icon>
           </button>
         </ion-col>

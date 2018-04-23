@@ -4,14 +4,11 @@ import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
    
+<<<<<<< HEAD
 
+=======
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -38,13 +35,25 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
 
   }
+
+
   login() {
+<<<<<<< HEAD
+    let userLogin = {
+=======
     let userData = {
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
       "name": this.name,
       
       "password": this.password
     };
 
+<<<<<<< HEAD
+    console.log(userLogin);
+    
+    this.loginService.postToLogin(userLogin).then((result) => {
+      console.log(result);
+=======
     console.log(userData);
     
     this.loginService.postToLogin(userData).then((result) => {
@@ -66,24 +75,52 @@ export class LoginPage {
     console.log(this.userID);
     this.userID = this.userID.id;
     this.loginService.changeUserID(this.userID);
+>>>>>>> 22f00190514ff872f6c1f6ac4cbf49ee7330a439
+
+      let responseData:any;
+      responseData = result;
+      console.log(responseData);
+      this.loginService.showToast(responseData.message);
+      localStorage.setItem('userLogin',JSON.stringify(userLogin));
+      localStorage.setItem('userID', JSON.stringify(responseData.id));
+
+    console.log(this.userID);
+    
 
 
+    }, (err) => {
+      //this.loginService.showToast('No connect to the server');
+    });
+
+    this.userID = JSON.parse(localStorage.getItem('userID'));
+    if(this.userID!=null){
+      //this.userID = this.userID.id;
+      this.loginService.changeUserID(this.userID);}
+    
+    
+    //load information for upcoming pages
     this.loginService.getUserdetail().then((result) => {
       let profile = result;
       console.log(profile);
 
-      //let toast = this.toastCtrl.create(this.responseData);
-      //toast.present();
-      //this.showToast(this.responseData.message);
       localStorage.setItem('profile', JSON.stringify(profile));
-      //this.navCtrl.push(LoginPage);
 
     }, (err) => {
-      //this.showToast('email is invalid or has been registered before');
-      //allert("Failed loading modules");
-      });
 
+      });
+  
+    let passport=JSON.parse(localStorage.getItem('userLogin'));
+    if (passport==null){
+        passport = {
+          "name":"name",
+          "password":"password"
+        }
+        passport=JSON.parse(JSON.stringify(passport));
+    } 
+    if (this.name === (passport.name) && (this.password === (passport.password))){
     this.navCtrl.setRoot(HomePage);
+    
+    }
   }
   private showToast(message: string) {
     let toast = this.toastCtrl.create({

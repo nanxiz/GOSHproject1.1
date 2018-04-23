@@ -1,10 +1,23 @@
 page-profile {
   .profile-image{
-width:100%;
+width:90%;
+height:60%;
   }
-  .pbg{
-    background-color: #f69454
-  }
+  .foo01 {
+    margin-top: -26%;
+    margin-bottom: 0em;
+    background: transparent !important;
+}
+
+.foo02 {
+    margin: auto;
+    width: 32vw !important;
+    height: 32vw !important;
+    border: 1.5vw solid map-get($map: $colors, $key: white);
+}
+ // .pbg{
+    //background-color: #f69454
+ // }
   .headers{ 
         //background-color:#40b0cc;
         //margin-bottom: 15px;
@@ -13,13 +26,13 @@ width:100%;
   }
   .username{
     color:#293d11;
-      font-size:32px;
+      font-size:27px;
   }
   .block{
       color:#fcf265
   }
   .points{
-      margin-top: 1px;
+      //margin-top: 1px;
       color:#293d11;
       font-size:13px;
       //color:rgb(253, 202, 106);
@@ -37,8 +50,9 @@ width:100%;
 
 //}
   }
+ 
   .leveldetail{
-      font-size:28px;
+      font-size:23px;
       font-weight: bold;
       color:#ee693f;
   }
@@ -48,7 +62,7 @@ width:100%;
       color:#293d11;
   }
   .pointsdetail{
-    font-size:25px;
+    font-size:20px;
     //margin-bottom: 1px;
     font-weight: bold;
     color:#739f3d;
