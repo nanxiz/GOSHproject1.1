@@ -1,13 +1,29 @@
 <ion-menu  [content]="content">
- 
+  <ion-header>
 
-  <ion-content>
-  <h4 class="menuheader1"> GOSH</h4>
-  <h4 class="menuheader2"> UNDERGRADUATE</h4>
-  <h4 class="menuheader3"> EDUCATION</h4>
+    <ion-navbar color="primary">
+      <ion-list no-lines>
+      <ion-item color="primary">
+   <p class="menuheader1"> GOSH</p>
+  </ion-item>
+  <ion-item color="primary">
 
-    <ion-list >
-      <button  class="menubutton" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+  <p class="menuheader2"> UNDERGRADUATE</p>
+</ion-item >
+<ion-item color="primary">
+
+  <p class="menuheader3"> EDUCATION</p>
+</ion-item>
+</ion-list>
+    </ion-navbar>
+  
+  </ion-header>
+  <ion-content class="menucontent">
+  
+
+    <ion-list no-lines >
+      <button text-wrap class="menubutton" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+       <ion-icon item-left [name]="p.icon" [color]="p.color"></ion-icon>
         {{p.title}}
       </button>
     </ion-list>

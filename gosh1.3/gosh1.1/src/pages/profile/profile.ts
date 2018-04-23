@@ -134,10 +134,7 @@ export class ProfilePage {
     if (responseData.message.indexOf("updated") != -1) {
       console.log("45678965454")
       this.updateDisplayedPropertyAndLocalstore(newValue, property);
-      //需要补充更新localstorage 在userservice中或许新建函数
-      //this.userInfo.
     }
-    //localStorage.setItem('userData', JSON.stringify(responseData));
 
     }, (err) => {
       this.showToast('No connect to the server');

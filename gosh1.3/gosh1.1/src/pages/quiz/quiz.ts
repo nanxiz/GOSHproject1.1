@@ -17,10 +17,12 @@ export class QuizPage {
   score: number = 0;
   count: number = 0;
   name:any;
-  newValue:any;
+  newValue:number;
+  slidePage=0;
   slideOptions: any;
   profile:any;
-  pointToAdd:number;
+  pointToAdd:number;   
+  serial:any;
   public questions: any;
   public Optionstodisplay: any;
   questionsNumber:number
@@ -28,10 +30,11 @@ export class QuizPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private quizUserService: UserserviceProvider,
-    private toastCtrl: ToastController,
+    private toastCtrl: ToastController
 
 
   ) {
+    this.serial = this.navParams.get("moduleSerial");
     this.questions = this.navParams.get("questions");
     this.name=this.navParams.get('moduleName');
     this.questions = JSON.parse( JSON.stringify(this.questions));
@@ -48,28 +51,37 @@ export class QuizPage {
 
   }
 
-  checkSlideLast(i){
-      if (i==this.questionsNumber){
-      this.newValue = (this.score / this.count * 100).toPrecision(2);
-        //put find object by key here
-        console.log(this.score);
-        if (this.newValue == 100){
-          this.pointToAdd = 10;
-      }
-      if (this.newValue>=80){
-          this.pointToAdd = 7;
-      }
-      if(this.newValue>=50 && (this.newValue<80)){
-        this.pointToAdd = 4;
-      }
-       if(this.newValue>=40 && (this.newValue<50))
-      {
-        this.pointToAdd = 3;
-      }
-      if(this.newValue<40){
-        this.pointToAdd=1;
-      }
+  checkSlideLast(){
+    console.log('slide',this.newValue);
+      //if (this.count ===0 &&this.score===1){
+        ////this.newValue=100
+      ////}
+      this.newValue = (this.score / this.count * 100);//}
 
+      if (this.slidePage==this.questionsNumber){
+        //if(this.score!=0){
+      this.newValue = (this.score / this.count * 100);//}
+      //else this.newValue = 0;
+        //put find object by key here
+        console.log("raate",this.newValue)
+        console.log(this.score);
+        if (this.newValue <40){
+          this.pointToAdd = 1;
+      }
+      else if (this.newValue<60){
+          this.pointToAdd = 3;
+      }
+      else if(this.newValue<80){
+        this.pointToAdd = 5;
+      }
+       else if(this.newValue<95)
+      {
+        this.pointToAdd = 7;
+      }
+      else if(this.newValue===100){
+        this.pointToAdd=10;
+      }
+      
 
       this.updateScore();
 
@@ -81,15 +93,15 @@ export class QuizPage {
   checkUserLevel(points):string{
     let level:string;
     if (points < 10){
-      return "noob";
+      return "beginer";
     }else if (points < 25){
-      return "noob+";
+      return "beginer+";
     }else if(points < 40){
-      return  "noob++";
+      return  "beginer++";
     }else if (points < 65){
-      return "noob with his own stuff";
+      return "beginer with his own stuff";
     }else if (points<95){
-      return "competetive noob";
+      return "competetive beginer";
     }else if (points < 180){
       return  "pro";
     }else if (points<300){
@@ -112,9 +124,9 @@ export class QuizPage {
   }
   updateTotalPoints(){
       
-
+      let pa=this.pointToAdd;
       let previousPoint = this.profile.user.points;
-      let newpoints=(previousPoint + this.pointToAdd).toString();
+      let newpoints=(previousPoint + pa).toString();
       this.profile.user.points=newpoints;
 
       this.quizUserService.updateUserDetail("points",newpoints).then((result) => {
@@ -132,7 +144,6 @@ export class QuizPage {
         }
 
       }, (err) => {
-       // this.showToast('No connect to the server');
       });
     
   
@@ -141,8 +152,14 @@ export class QuizPage {
   }
 
   nextSlide() {
+    this.slidePage++;
+    
+    console.log('page',this.slidePage);
+
     this.slides.lockSwipes(false);
+
     this.slides.slideNext();
+
     this.slides.lockSwipes(true);
   }
 
@@ -150,21 +167,32 @@ export class QuizPage {
     this.answered = true;
     answer.selected = true;
     this.count++;
+   // 
+
     if (answer.correct) {
       this.score++;
-      this.showToast("Correct!");
+      //this.showToast("Correct!");
+      this.checkSlideLast();
+
+      this.quizUserService.showToast("Correct!");
+
 
     }
     else{
-      this.showToast("Wrong!");
+      this.quizUserService.showToast("Wrong!");
+      this.checkSlideLast();
+
+      //showToast("Wrong!");
 
     }
-    this.checkSlideLast(i);
+   // this.checkSlideLast();
 
-    setTimeout(() => {
+    setTimeout(() => {   
       this.answered = false;
 
       this.nextSlide();
+
+
       answer.selected = false;
     }, 500);
   }
@@ -185,7 +213,7 @@ export class QuizPage {
     //this.updateScore();
     this.setZero();
 
-    this.navCtrl.push(LearntabsPage,{tabIndex: 3});
+    this.navCtrl.push(ModuleleaderPage,{tabIndex: 3});
 
    // this.slides.lockSwipes(true);
     //updatescore
@@ -203,13 +231,14 @@ export class QuizPage {
     this.score = 0;
     this.count = 0;
     this.newValue=0;
-    this.pointToAdd=0;
+   // this.pointToAdd=0;
     this.questionsNumber=0;
+    this.slidePage=1;
   }
   updateScore() {
 
     console.log(this.newValue);
-
+    let nv=this.newValue;
     console.log(this.score);
    //change the property below later when module and quiz name could match
     let property = this.name;
@@ -220,7 +249,8 @@ export class QuizPage {
     
     //this.profile.user.
     
-    let newValuestring = this.newValue.toString();
+    let newValuestring = nv.toString();
+    //this.newValue=0;
     this.quizUserService.updateUserDetail(property, newValuestring).then((result) => {
         let responseData: any;
         responseData = result;
@@ -236,17 +266,11 @@ export class QuizPage {
         localStorage.setItem('userData', JSON.stringify(responseData));
 
       }, (err) => {
-       // this.showToast('No connect to the server');
+       this.quizUserService.showToast('Unable to update score. No connect to the server');
       });
     
   }
-  showToast(message: string) {
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3300
-    });
-    toast.present();
-  }
+ 
 
 
   /*

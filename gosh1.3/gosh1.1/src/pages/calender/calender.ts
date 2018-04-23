@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-//import { Calendar } from '@ionic-native/calendar';
-//import{CaldetailPage}from'../caldetail/caldetail'
-/**
- * Generated class for the CalenderPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { UserserviceProvider } from '../../providers/userservice/userservice';
+
 
 @IonicPage()
 @Component({
@@ -16,10 +10,16 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 })
 export class CalenderPage {
   //calendars=[];
+  products:any;
+  prodo=[];
+  events:any;
+  timeline:any;
   // pet:"puppies";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public userservice: UserserviceProvider
+
   //  private calendar:Calendar,
   //  private pltform:Platform
   ) {
@@ -32,20 +32,39 @@ export class CalenderPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalenderPage');
+    this.userservice.loadevents().then((result) => {
+      this.events = result;
+      localStorage.setItem('events', JSON.stringify(this.events));
+      console.log(this.events);
+    }, (err) => {     
+      this.userservice.showToast('Unable to update modules. No connect to the server');
+    });
+   
+
+    this.events = JSON.parse(localStorage.getItem('events'));
+    this.products = this.events.products;
+    console.log(this.events);
+    console.log(this.products);
+    let count = this.events.count;
+
+
+
   }
 
-  addEvent(calendar){
+
+
+  //addEvent(calendar){
   //  let date=new Date();
   //  let options ={calendaRId:calendar.id,calendarName:calendar.name,firstRemindermin:15}
   //  this.calendar.createEventInteractivelyWithOptions('My new event','London','some special notes',date,date,options).then(data=>{
   //  });
   
   
-  }
-  openCal(calendar){
+ // }
+  //openCal(calendar){
    //   this.navCtrl.push(CaldetailPage,{name: calendar.name})
-  }
-
+  //}
+  
 
   
 

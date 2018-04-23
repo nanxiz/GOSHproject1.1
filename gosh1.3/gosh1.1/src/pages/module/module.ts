@@ -6,7 +6,7 @@ import { AppsettingProvider } from '../../providers/appsetting/appsetting';
 import { ModuledetailPage } from '../moduledetail/moduledetail';
 import { QuizPage } from '../quiz/quiz';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
-
+//text-lowercase
 
 @IonicPage()
 @Component({
@@ -14,11 +14,16 @@ import { UserserviceProvider } from '../../providers/userservice/userservice';
   templateUrl: 'module.html',
 })
 export class ModulePage {
-  apiURL = this.appsetting.getApiURL() + 'products/';
+  //apiURL = this.appsetting.getApiURL() + 'products/';
   modules: any;
+  departmentModule:any;
   products: any;
   name:any;
   level:any;
+  department='';
+  dptModuleProduct:any;
+  moduleType;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,30 +33,52 @@ export class ModulePage {
     public userservice: UserserviceProvider
   ) {
    
-
+    this.moduleType="myModule";
   }
 
   ionViewDidLoad() {
+    
+
     console.log('ionViewDidLoad ModulePage');
 
-    //put this shit in provider
     this.moduleservise.loadmodules().then((result) => {
       this.modules = result;
       localStorage.setItem('modules', JSON.stringify(this.modules));
+      console.log(this.modules);
     }, (err) => {     
+      this.userservice.showToast('Unable to update modules. No connect to the server');
     });
-    //for unknown reason modules' value couldn't be passed so code below is given.
+
+
     this.modules = JSON.parse(localStorage.getItem('modules'));
     this.products = this.modules.products;
     
-   // this.userInfo = JSON.parse(localStorage.getItem('profile'));
     this.getUserInfo();
-   
+    this.getUserDepartmentModule();
+    
 
     console.log(this.modules);
    // console.log(this.userInfo);
   }
 
+  getUserDepartmentModule(){
+    let departmentData:any;
+    departmentData={
+      "department":this.department
+      
+    };
+    this.moduleservise.postToGetPersonalizedModule(departmentData).then((result) => {
+      this.departmentModule = result;
+      localStorage.setItem('departmentModules', JSON.stringify(this.departmentModule));
+      console.log(result);
+    }, (err) => {     
+    
+    });
+    this.departmentModule = JSON.parse(localStorage.getItem('departmentModules'));
+    this.dptModuleProduct=this.departmentModule.product;
+    console.log('all',this.dptModuleProduct);
+    console.log('all',this.departmentModule);
+  }
   getUserInfo() {
     this.userservice.getUserdetail().then((result) => {
       let profile = result;
@@ -63,10 +90,11 @@ export class ModulePage {
     }, (err) => {
       
       });
-      let userInfo = JSON.parse(localStorage.getItem('profile'));
+    let userInfo = JSON.parse(localStorage.getItem('profile'));
 
     this.name = userInfo.user.name;
-this.level=userInfo.user.level;
+    this.department=''+(userInfo.user.department);
+    this.level=userInfo.user.level;
   }
 
   gotoModuleDetail(product) {
@@ -75,23 +103,21 @@ this.level=userInfo.user.level;
     });
   }
 
-  gotoQuiz(name,questions) {
+  gotoQuiz(name,questions,serial) {
     this.navCtrl.push(QuizPage, {
       moduleName:name,
-      questions: questions
+      questions: questions,
+      moduleSerial:serial
     })
   }
 
-
-  toggleSection(i) {
+  toggleModuleDetail(i) {
     this.products[i].open = !this.products[i].open;
   }
 
- // toggleItem(i, j) {
-   // this.products[i].children[j].open = !this.products[i].children[j].open;
-
-//  }
+  toggleModuleDetailD(i){
+    this.dptModuleProduct[i].open=!this.dptModuleProduct[i].open;
+  }
 
 }
-//*ngFor="let module of modules.products"
-//<ion-card-content>{{module.products.name}}</ion-card-content>
+

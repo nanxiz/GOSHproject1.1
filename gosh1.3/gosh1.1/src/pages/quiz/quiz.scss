@@ -10,8 +10,17 @@
       margin-bottom:6px;
 
     }
+    .score{
+      font-size:18px;
+      color:rgba(0, 0, 0, 0.822);
+    }
+    .scorevalue{
+      font-size:25px;
+      color:#ee693f;
+
+    }
     .qheader{
-      color:#f18d9e;
+      color:#19a00c;
       margin-top:25px;
     }
     .cheader{
@@ -20,12 +29,12 @@
       margin-top:10px;
     }
     .card{
-      margin-top: 95px;
+      margin-top: 65px;
       max-width:95%;
 
     }
     .finalslide{
-      background-color: #f69454
+      background-color: map-get($map: $colors, $key: primary);
     }
     .row{
       margin-top:50px;
@@ -42,6 +51,7 @@ margin-bottom: 50px;
       button{
         font-weight:bold;
         font-size:1.8em;
+        //color:#19ff84;
        // font-style: map-get($map: $colors, $key: light)
       }
     }

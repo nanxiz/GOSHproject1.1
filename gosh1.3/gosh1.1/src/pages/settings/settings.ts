@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ToastController, AlertController  } from 'ionic-angular';
 import { UserserviceProvider } from '../../providers/userservice/userservice'
 import{LoginPage}from'../login/login';
+import {EmailComposer}from'@ionic-native/email-composer';
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -22,8 +24,8 @@ export class SettingsPage {
     public navParams: NavParams,    
     private profileService: UserserviceProvider,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController
-
+    private alertCtrl: AlertController,
+    private emailcomposer:EmailComposer
 
   ) {
   }
@@ -60,9 +62,21 @@ export class SettingsPage {
             alert("Password is too short");
           }
         }
-      }]
+      }]   
     });
     editAlert.present();
+  }
+
+  emailFeedBack(){
+      let email={
+        to:'nanxigz@gmail.com',
+        subject:'User feedback to GOSH UE',
+        body:'Hello <br>',
+        isHtml: true,
+
+      };
+
+      this.emailcomposer.open(email);
   }
 
 

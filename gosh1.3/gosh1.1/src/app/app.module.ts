@@ -24,9 +24,10 @@ import { CalenderPage } from '../pages/calender/calender';
 import { WelcomePage } from '../pages/welcome/welcome'
 //import { Calendar } from '@ionic-native/calendar';
 import {UsefullinkPage}from'../pages/usefullink/usefullink';
-
+import{WheelSelector} from '@ionic-native/wheel-selector';
 //import { Calendar } from '@ionic-native/Calendar';
-
+import {EmailComposer}from'@ionic-native/email-composer';
+import {ThemeableBrowser} from '@ionic-native/themeable-browser';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,8 @@ import {UsefullinkPage}from'../pages/usefullink/usefullink';
     ContactPage,
     ModuleleaderPage,
     LearntabsPage,
-    UsefullinkPage,
-    
+    UsefullinkPage,  
+      
     SettingsPage,
     LoginPage,
     RegisterPage,
@@ -66,8 +67,11 @@ import {UsefullinkPage}from'../pages/usefullink/usefullink';
     WelcomePage
   ],
   providers: [
+    WheelSelector,
     StatusBar,
     //Calendar,
+    EmailComposer,
+    ThemeableBrowser,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppsettingProvider,

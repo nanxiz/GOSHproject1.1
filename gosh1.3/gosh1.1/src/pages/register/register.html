@@ -31,9 +31,18 @@
     </ion-item>
 
     <ion-item>
+        <ion-label stacked>Department</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="department"></ion-input>
+      </ion-item>
+  
+  
+
+
+      <!--
       <ion-label stacked >Department</ion-label>
       <ion-input type="text" value="" [(ngModel)]="department"></ion-input>
-    </ion-item>
+    -->
+    
 
     <ion-item>
       <ion-label stacked >University</ion-label>
@@ -41,7 +50,7 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button full round class="tMargin" (click)="register()">Register</button>
+  <button ion-button block outline round class="tMargin" (click)="register()">Register</button>
   <!--<a href="#" (click)="login()">Back to Login Page</a>-->
   <button ion-button full clear small class="bMargin" (click)="login()">Go Back to Login</button>
 

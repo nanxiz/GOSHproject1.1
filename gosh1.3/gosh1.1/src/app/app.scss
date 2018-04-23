@@ -1,23 +1,28 @@
 // http://ionicframework.com/docs/theming/
-
-.menuheader1{
-    color:rgb(255, 209, 216);
-    margin-top:30px;
-    margin-left:6px;
+.menucontent{
+    background-color:#f69454(255, 209, 216);
 }
+.menuheader1{
+    margin-top:8px;
+    margin-left:1px;
+    font-size:1em;
+    color: black;  
+}   
+//change all the ps to one difi
 .menuheader2{
-    color:rgb(252, 176, 189); 
-    margin-left:6px;
-
+    margin-left:1px;
+    font-size:1em;
+    color: black;
 }
 .menuheader3{
-    color:rgb(253, 138, 157);
-    margin-left:6px;
-
-    margin-bottom:10px;
+    margin-left:1px;
+    font-size:1em;
+    color: black;
+    margin-bottom:1px;
 }
 .menubutton{
     font-size: 15px;
+    margin-top: 4px;  
 }
 
 // App Global Sass

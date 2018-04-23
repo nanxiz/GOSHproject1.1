@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import {ToastController} from 'ionic-angular';
 
   
 import { Injectable } from '@angular/core';
@@ -15,18 +16,42 @@ export class UserserviceProvider {
   apiURL = this.appsetting.getApiURL() + 'users/';
 
 
-  userID = "5ace23ceb45c575b89f167c8"; 
+  userID = "5adbaef05a9468354e986a66"; 
 
 
 
-  constructor(public http: HttpClient, public appsetting: AppsettingProvider) {
+  constructor(
+    public http: HttpClient, 
+    public appsetting: AppsettingProvider,
+    private toastCtrl: ToastController,
+  ) {
     
   }
-
+  public loadevents(){  
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.appsetting.getApiURL() + 'events/')
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public changeUserID(newid: string) {
     this.userID = newid;
   }
-
+  public loadleaders(quizname){
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.apiURL + 'leaders/'+quizname)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   public getAllUserDetail() {
     return new Promise((resolve, reject) => {
       //let hheaders = new Headers();
@@ -65,18 +90,26 @@ export class UserserviceProvider {
 
   }
 
-  public postToLogin(username, password) { //change
+  public postToLogin(userData) { //change
 
-    return this.http.post(this.apiURL + 'login', { 'name': username, 'password': password })
-      .subscribe(response => console.log(response));
+     return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.post(this.apiURL + 'login', userData,{
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
-
 
 
   
   public postToRegister(userData) {
     return new Promise((resolve, reject) => {
-      //let hheaders = new Headers();
+
       this.http.post(this.apiURL + 'signup', userData)
         .subscribe(res => {
           resolve(res);
@@ -85,11 +118,34 @@ export class UserserviceProvider {
         });
     });
   }
-  
+
 
   public getUserModules() {
-    return this.http.get(this.apiURL + 'signup', {})
+    return this.http.get(this.apiURL + 'signup')
       .subscribe(response => console.log(response));
   }
+
+  public getDepartments(){
+
+    return new Promise((resolve, reject) => {
+      //let hheaders = new Headers();
+      this.http.get(this.apiURL + 'all/departments')
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  public showToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 900
+    });
+    toast.present();
+  }
+  
+
 
 }

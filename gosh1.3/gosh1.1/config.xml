@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.164:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -84,4 +84,7 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <allow-navigation href="http://192.168.1.164:8101" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-wheel-selector-plugin" spec="^1.1.0" />
+    <plugin name="cordova-plugin-email" spec="^1.2.7" />
+    <plugin name="cordova-plugin-themeablebrowser" spec="^0.2.17" />
 </widget>
